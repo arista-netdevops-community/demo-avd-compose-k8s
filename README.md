@@ -13,6 +13,7 @@ __DISCLAIMER__: This repository is a proof of concept and self-training reposito
   - [Automate using docker-compose](#automate-using-docker-compose)
   - [Automate using Kubernetes](#automate-using-kubernetes)
     - [POD definition.](#pod-definition)
+    - [Service definition](#service-definition)
   - [License](#license)
 
 ## About
@@ -279,6 +280,8 @@ Status:       Running
 IP:           10.1.41.188
 [... output truncated ...]
 ```
+
+### Service definition
 
 Now we have to expose NGINX to access to our documentation. As we are on a small cluster on premise, we are using `NodePort` to access to POD. It is configure to be a static port set to 31080 (`nodePort: 31080`)
 
