@@ -11,14 +11,14 @@
 # Builder variables
 # Protect var if not set in K8S specs:
 # - name: REPO_AVD_DATA
-#   value: "https://github.com/inetsix/avd-with-compose-kubernetes.git"
+#   value: "https://github.com/titom73/avd-for-compose-kubernetes-demo.git"
 # - name: ANSIBLE_PLAYBOOK
 #   value: "dc1-fabric-deploy-cvp.yml"
 # - name: ANSIBLE_TAGS
 #   value: "build"
 
 if [[ -z REPO_AVD_DATA ]]; then
-    export REPO_AVD_DATA='https://github.com/inetsix/avd-with-compose-kubernetes.git'
+    export REPO_AVD_DATA='https://github.com/titom73/avd-for-compose-kubernetes-demo.git'
 else
     echo 'REPO_AVD_DATA is set from outside with: '${REPO_AVD_DATA}
 fi
