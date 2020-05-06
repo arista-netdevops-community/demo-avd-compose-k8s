@@ -27,7 +27,7 @@ spec:
     image: titom73/k8s_avd:0.0.1
     env:
       - name: REPO_AVD_DATA
-        value: "https://github.com/titom73/ansible-avd-cloudvision-demo.git"
+        value: "https://github.com/titom73/avd-for-compose-kubernetes-demo.git"
       - name: ANSIBLE_PLAYBOOK
         value: "dc1-fabric-deploy-cvp.yml"
       - name: ANSIBLE_TAGS
