@@ -7,7 +7,7 @@ services:
   avd-builder:
     build: '../docker/avd/'
     environment:
-      - REPO_AVD_DATA=https://github.com/titom73/ansible-avd-cloudvision-demo.git
+      - REPO_AVD_DATA=https://github.com/titom73/avd-for-compose-kubernetes-demo.git
       - ANSIBLE_PLAYBOOK='dc1-fabric-deploy-cvp.yml'
       - ANSIBLE_TAGS='build'
     volumes:
