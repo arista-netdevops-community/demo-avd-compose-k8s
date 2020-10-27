@@ -3,13 +3,13 @@
 # Purpose: Entrypoint for AVD Demo container
 #
 # Author: @titom73
-# Date: 2020-04-27
-# Version: 0.1
+# Date: 2020-10-26
+# Version: 0.2
 # License: BSD
 # --------------------------------------
 
 # Builder variables
-# Protect var if not set in K8S specs:
+# Protected var if not set in K8S specs:
 # - name: REPO_AVD_DATA
 #   value: "https://github.com/inetsix/avd-for-compose-kubernetes-demo.git"
 # - name: ANSIBLE_PLAYBOOK
@@ -18,7 +18,7 @@
 #   value: "build"
 
 if [[ -z REPO_AVD_DATA ]]; then
-    export REPO_AVD_DATA='https://github.com/inetsix/avd-for-compose-kubernetes-demo.git'
+    export REPO_AVD_DATA='https://github.com/arista-netdevops-community/avd-for-compose-kubernetes-demo.git'
 else
     echo 'REPO_AVD_DATA is set from outside with: '${REPO_AVD_DATA}
 fi
@@ -63,6 +63,9 @@ echo '* Building configuration and documentation'
 ${ANSIBLE_PLAYBOOK_BIN} ${ANSIBLE_PLAYBOOK} --tags ${ANSIBLE_TAGS}
 
 echo '* Building documentation'
+if [[ -f medias/stylesheet.css ]]; then
+  cp -r medias/stylesheet.css documentation/
+fi;
 mkdocs build -f mkdocs.yml
 mv site/* /web/
 

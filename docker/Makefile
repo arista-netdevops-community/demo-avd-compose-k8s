@@ -1,7 +1,7 @@
 CURRENT_DIR = $(shell pwd)
 DOCKER_NAME ?= k8s_avd
 DOCKER_BASE ?= titom73
-DOCKER_TAG ?= 0.0.1
+DOCKER_TAG ?= 0.0.2
 DOCKER_DIR ?= avd
 ANSIBLE_VERSION ?= 2.9.6
 

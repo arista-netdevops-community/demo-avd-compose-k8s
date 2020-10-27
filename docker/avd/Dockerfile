@@ -1,4 +1,4 @@
-FROM avdteam/base:centos-8
+FROM avdteam/base:3.6
 LABEL maintainer="Arista Ansible Team <ansible@arista.com>"
 
 ADD ./entrypoint.sh /root/entrypoint.sh

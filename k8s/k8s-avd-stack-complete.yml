@@ -27,7 +27,7 @@ spec:
     image: titom73/k8s_avd:0.0.2
     env:
       - name: REPO_AVD_DATA
-        value: "https://github.com/arista-netdevops-community/avd-for-compose-kubernetes-demo.git"
+        value: "https://github.com/titom73/avd-for-compose-kubernetes-demo.git"
       - name: ANSIBLE_PLAYBOOK
         value: "dc1-fabric-deploy-cvp.yml"
       - name: ANSIBLE_TAGS
@@ -36,3 +36,17 @@ spec:
       - name: avd-data
         mountPath: /web/
     imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: avd-documentation-service
+spec:
+  type: NodePort
+  ports:
+  - nodePort: 31080
+    port: 80
+    targetPort: 80
+  selector:
+    run: avd-web
+    app: nginx
