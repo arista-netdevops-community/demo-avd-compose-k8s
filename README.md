@@ -117,7 +117,8 @@ docker run --rm -it \
 		-e ANSIBLE_PLAYBOOK='dc1-fabric-deploy-cvp.yml' \
 		-e ANSIBLE_TAGS='build' \
 		-v /etc/hosts:/etc/hosts titom73/k8s_avd:0.0.1
-REPO_AVD_DATA is set from outside with: https://github.com/titom73/avd-for-compose-kubernetes-demo.git
+REPO_AVD_DATA is set from outside \
+  with: https://github.com/titom73/avd-for-compose-kubernetes-demo.git
 Cloning repository ...
 Cloning into '.'...
 remote: Enumerating objects: 533, done.
