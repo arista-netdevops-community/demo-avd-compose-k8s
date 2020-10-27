@@ -70,5 +70,5 @@ mkdocs build -f mkdocs.yml
 rm -rf /web/*
 mv site/* /web/
 
-echo '* Infinite wait...'
-tail -f /dev/null
+# echo '* Infinite wait...'
+# tail -f /dev/null

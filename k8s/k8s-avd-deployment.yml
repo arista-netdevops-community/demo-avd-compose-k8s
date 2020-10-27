@@ -16,6 +16,8 @@ spec:
     metadata:
       labels:
         app: avd
+        run: avd-web
+        app: avd
     spec:
       restartPolicy: Always
       volumes:
@@ -31,6 +33,7 @@ spec:
           volumeMounts:
             - name: avd-data
               mountPath: /usr/share/nginx/html/
+      initContainers:
         - name: avd-builder
           image: titom73/k8s_avd:0.0.2
           env:
@@ -52,9 +55,9 @@ metadata:
 spec:
   type: NodePort
   ports:
-  # - nodePort: 31080
-  - port: 80
+  - nodePort: 31080
+    port: 80
     targetPort: 80
   selector:
-    run: avd-web
     app: avd
+    run: avd-web
