@@ -11,7 +11,7 @@ __DISCLAIMER__: This repository is a proof of concept and self-training reposito
       - [Automatic Testing](#automatic-testing)
   - [Automate using docker-compose](#automate-using-docker-compose)
   - [Automate using Kubernetes](#automate-using-kubernetes)
-    - [POD definition.](#pod-definition)
+    - [POD definition](#pod-definition)
     - [Service definition](#service-definition)
   - [License](#license)
 
@@ -25,13 +25,15 @@ Arista Validated Design is an ansible collection to build and deploy EVPN/VXLAN 
 - Apply configuration (optional)
 - Expose documentation using a web server.
 
-![](medias/avd-docker-k8s.png)
+<p align="center">
+  <img src='medias/avd-docker-k8s.png' alt='Arista Validated Design' width="600"/>
+</p>
 
 ## Generic overview
 
 Generic workflow is to have a specific git repository where all the configuration elements are available. It means this repository does not focus on how to manage AVD, but how we can leverage docker-compose or kubernetes to completely automate deployment.
 
-In this demo, we will use [this demo repository](https://github.com/titom73/ansible-avd-cloudvision-demo) to provide AVD content. This repository comes with a [single playbook](https://github.com/titom73/ansible-avd-cloudvision-demo/blob/master/dc1-fabric-deploy-cvp.yml) to generate and deploy based on ansible tags (build / generate). Some other contents are also part of the repository as it is a dedicated demo, but in our case, we will only focus on these elements.
+In this demo, we will use [this demo repository](https://github.com/titom73/ansible-avd-cloudvision-demo) to provide AVD content. This repository comes with a [single playbook](https://github.com/titom73/ansible-avd-cloudvision-demo/blob/master/dc1-fabric-deploy-cvp.yml) to generate and deploy based on ansible tags (build / generate). Some other contents are also part of the repository as it is a dedicated demo, but in our case, we will only focus on container deployment to publish configuration and documentation.
 
 ## Docker image
 
@@ -194,7 +196,7 @@ When ready, content will be available on http://127.0.0.1:8080
 
 In this section, we will see how to consume worklfow above in a Kubernetes cluster. To achieve this phase, we have to use image built in this [section](#docker-image) meaning it has to be on a docker registry.
 
-### POD definition.
+### POD definition
 
 This demo has been built using a Microk8s instance.
 
@@ -330,7 +332,7 @@ kubernetes                  ClusterIP      10.152.183.1     <none>        443/TC
 web-service                 NodePort       10.152.183.26    <none>        8080:31081/TCP   27h
 ```
 
-And finally, you can access to your POD documentation using POD ip address:
+And finally, you can access to your POD documentation using POD ip address and listening port (`31080`):
 
 ![](medias/k8s-web-outputs.png)
 

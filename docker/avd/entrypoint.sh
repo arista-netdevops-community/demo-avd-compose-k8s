@@ -67,6 +67,7 @@ if [[ -f medias/stylesheet.css ]]; then
   cp -r medias/stylesheet.css documentation/
 fi;
 mkdocs build -f mkdocs.yml
+rm -rf /web/*
 mv site/* /web/
 
 echo '* Infinite wait...'

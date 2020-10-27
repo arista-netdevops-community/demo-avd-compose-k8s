@@ -5,19 +5,18 @@ volumes:
 
 services:
   avd-builder:
+    name: avd_builder
     build: '../docker/avd/'
     environment:
       - REPO_AVD_DATA=https://github.com/titom73/avd-for-compose-kubernetes-demo.git
-      - ANSIBLE_PLAYBOOK='dc1-fabric-deploy-cvp.yml'
-      - ANSIBLE_TAGS='build'
+      - ANSIBLE_PLAYBOOK=dc1-fabric-deploy-cvp.yml
+      - ANSIBLE_TAGS=build
     volumes:
       - avd_volume:/web
   avd-web:
+    name: avd_web
     image: "nginx"
     ports:
       - "8080:80"
     volumes:
       - avd_volume:/usr/share/nginx/html/
-
-
-
