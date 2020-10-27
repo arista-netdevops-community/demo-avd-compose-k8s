@@ -26,7 +26,7 @@ Arista Validated Design is an ansible collection to build and deploy EVPN/VXLAN 
 - Expose documentation using a web server.
 
 <p align="center">
-  <img src='medias/avd-docker-k8s.png' alt='Arista Validated Design' width="500"/>
+  <img src='medias/avd-docker-k8s.png' alt='Arista Validated Design' width="400"/>
 </p>
 
 ## Generic overview
