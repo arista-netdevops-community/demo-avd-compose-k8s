@@ -13,6 +13,10 @@ __DISCLAIMER__: This repository is a proof of concept and self-training reposito
   - [Automate using Kubernetes](#automate-using-kubernetes)
     - [POD definition](#pod-definition)
     - [Service definition](#service-definition)
+    - [Use Kubernetes deployment](#use-kubernetes-deployment)
+      - [Deployment](#deployment)
+      - [Monitor](#monitor)
+      - [Redeploy new version of your code](#redeploy-new-version-of-your-code)
   - [License](#license)
 
 ## About
@@ -336,6 +340,71 @@ web-service                 NodePort       10.152.183.26    <none>        8080:3
 And finally, you can access to your POD documentation using POD ip address and listening port (`31080`):
 
 ![](medias/k8s-web-outputs.png)
+
+### Use Kubernetes deployment
+
+You can use pre-configured deployment file to run:
+
+- AVD builder (init Container)
+- Expose documentation on port 80
+- Create a service to expose documentation on port 80
+
+#### Deployment
+
+```shell
+$ kubectl apply -f k8s/k8s-avd-deployment.yml
+```
+
+#### Monitor
+
+You can monitor deployment
+
+```shell
+$ kubectl get deployments.apps --watch
+NAME                           READY   UP-TO-DATE   AVAILABLE   AGE
+avd-documentation-deployment   0/1     1            0           5s
+avd-documentation-deployment   1/1     1            1           79s
+avd-documentation-deployment   1/1     1            1           3m54s
+
+$ kubectl get service --watch
+NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+avd-documentation-service   NodePort    10.152.183.95    <none>        80:31080/TCP     20s
+```
+
+To show containers logging, you can leverage [stern]()
+
+```shell
+$ stern avd-documentation-deployment
+
++ avd-documentation-deployment-56878c6656-lgrm6 › avd-builder
+avd-documentation-deployment-56878c6656-lgrm6 avd-builder REPO_AVD_DATA is set from outside with: https://github.com/titom73/avd-for-compose-kubernetes-demo.git
+avd-documentation-deployment-56878c6656-lgrm6 avd-builder Cloning repository ...
+avd-documentation-deployment-56878c6656-lgrm6 avd-builder Cloning into '.'...
+avd-documentation-deployment-56878c6656-lgrm6 avd-builder Found additional requirements, installing ..
+
+[ ... output truncated ... ]
+
+avd-documentation-deployment-56878c6656-lgrm6 avd-builder
+avd-documentation-deployment-56878c6656-lgrm6 avd-builder * Building documentation
+avd-documentation-deployment-56878c6656-lgrm6 avd-builder INFO    -  Cleaning site directory
+avd-documentation-deployment-56878c6656-lgrm6 avd-builder INFO    -  Building documentation to directory: /projects/site
+avd-documentation-deployment-56878c6656-lgrm6 avd-builder INFO    -  Documentation built in 1.81 seconds
++ avd-documentation-deployment-56878c6656-lgrm6 › avd-web
+- avd-documentation-deployment-5d5ddb47bc-jznnv
+- avd-documentation-deployment-5d5ddb47bc-jznnv
+avd-documentation-deployment-56878c6656-lgrm6 avd-web 10.83.28.163 - - [28/Oct/2020:08:03:40 +0000] "GET /devices/DC1-LEAF1A/ HTTP/1.1" 200 81741 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:81.0) Gecko/20100101 Firefox/81.0" "-"
+
+
+```
+
+#### Redeploy new version of your code
+
+Just use rollout method supported by deployment
+
+```shell
+$ kubectl rollout restart deployment avd-documentation-deployment
+deployment.apps/avd-documentation-deployment restarted
+```
 
 ## License
 
